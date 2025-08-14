@@ -1,0 +1,18 @@
+body{
+    margin: 2rem;
+    text-align: center;
+    background-color: bisque;
+}
+
+button{
+    padding: 1rem;
+    background-color: bisque;
+    border-radius: 20px;
+}
+
+#container{
+    padding: 2rem;
+    background-color: antiquewhite;
+    border-radius: 25px;
+    border-style: double;
+}

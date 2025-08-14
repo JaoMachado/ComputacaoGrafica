@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Manipulação com DOM</title>
+</head>
+
+<body>
+    <h1>Manipulação com DOM</h1>
+
+    <div id="container">
+
+        <button id="btnTrocarCor">Trocar Cor</button>
+        <br><br>
+        <button id="btnOcultar">Ocultar</button>
+        <button id="btnVoltar">Voltar</button>
+
+        <p id="paragrafo">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id cupiditate voluptas, repudiandae accusamus nesciunt fugit rerum nostrum porro officia placeat blanditiis
+             commodi quidem aut dolore in odio provident soluta reiciendis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde illum deserunt beatae eligendi earum 
+             eveniet in soluta tempora nihil, perferendis natus reprehenderit sint quod. Adipisci doloremque ipsam nihil inventore consequatur. Lorem ipsum dolor sit amet 
+             consectetur adipisicing elit. Accusantium, eligendi! Similique animi officia odio nostrum a possimus laborum voluptatum molestiae quo sed excepturi error nulla unde, 
+             obcaecati commodi labore laboriosam. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero odio velit veniam, eaque corrupti at dolor impedit quo rem quidem, 
+             asperiores perspiciatis voluptate molestias sint aut. Eaque aliquid nemo distinctio?</p>
+    </div>
+
+    <script>
+
+        const btnTrocarCor = document.getElementById("btnTrocarCor");
+        const btnOcultar = document.getElementById("btnOcultar");
+        const paragrafo = document.getElementById("paragrafo");
+        const container = document.getElementById("container");
+        const btnVoltar = document.getElementById("btnVoltar");
+        
+        btnTrocarCor.addEventListener("click", () =>{
+            const atualBody = document.body.style.backgroundColor;
+            document.body.style.backgroundColor = atualBody === "bisque" ? "antiquewhite" : "bisque";
+
+            const atualBtnCor = btnTrocarCor.style.backgroundColor;
+            btnTrocarCor.style.backgroundColor = atualBtnCor === "bisque" ? "antiquewhite" : "bisque";
+            btnOcultar.style.backgroundColor = atualBtnCor === "bisque" ? "antiquewhite" : "bisque";
+            btnVoltar.style.backgroundColor = atualBtnCor === "bisque" ? "antiquewhite" : "bisque";
+
+            const atualContainer = container.style.backgroundColor;
+            container.style.backgroundColor = atualContainer === "antiquewhite" ? "bisque" : "antiquewhite";
+
+        });
+
+        btnOcultar.addEventListener("click", () => {
+            const atualOcultar = paragrafo.style.display;
+            paragrafo.style.display = "none";
+        });
+
+        btnVoltar.addEventListener("click", () => {
+            const atualOcultar = paragrafo.style.display;
+            paragrafo.style.display = "block";
+        });
+    </script>
+</body>
+    
+</html>
