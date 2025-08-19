@@ -1,0 +1,5 @@
+npm init
+instalar three(npm install three)
+instalar vite(npm install --save-dev vite)
+criar estrutura(html, src e assets)
+start(npx vite)

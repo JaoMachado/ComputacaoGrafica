@@ -1,0 +1,25 @@
+{
+  "name": "cena",
+  "version": "1.0.0",
+  "description": "Exemplo de Cena com Geometrias em three.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaoMachado/ComputacaoGrafica.git"
+  },
+  "author": "João Pedro Machado Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JaoMachado/ComputacaoGrafica/issues"
+  },
+  "homepage": "https://github.com/JaoMachado/ComputacaoGrafica#readme",
+  "dependencies": {
+    "three": "^0.179.1"
+  },
+  "devDependencies": {
+    "vite": "^4.4.9"
+  }
+}
