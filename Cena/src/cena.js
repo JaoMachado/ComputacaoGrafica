@@ -6,6 +6,7 @@
 */
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { OBJLoader } from "three/examples/jsm/Addons.js";
 
 // 1. criar uma cena básica
 const cena = new THREE.Scene();
@@ -45,6 +46,62 @@ const controlador = new OrbitControls(camera, renderizador.domElement);
 controlador.maxPolarAngle = 90 * (Math.PI / 180);
 
 // 6. criar objetos e montar a cena
+
+// Criar um array de objetos
+const objetos = [];
+
+// Criar Função para add esferas na cena
+function addEsfera(){
+  const geometriaEsfera = new THREE.SphereGeometry();
+  const materialEsfera = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+  const esfera = new THREE.Mesh(geometriaEsfera, materialEsfera);
+
+// Adicionar a esfera em posições aleatórias
+  esfera.position.set(
+    Math.random() * 10 - 5,
+    Math.random() * 10,
+    Math.random() * 10 - 5
+  );
+
+  esfera.castShadow = true;
+  cena.add(esfera);
+  objetos.push(esfera);
+}
+
+// Programar evento "click"
+
+// Pega o botão pelo id
+const btnAddEsfera = document.getElementById("btnAddEsfera");
+
+// Add o evento
+btnAddEsfera.addEventListener("click", () => {
+  addEsfera();
+});
+
+//Função Remover
+function remover(){
+  if(objetos.length > 0){
+    // remove do array
+    const obj = objetos.pop();
+    // remove da cena
+    cena.remove(obj);
+  }
+}
+
+// Botão Remover
+const btnRemoveEsfera = document.getElementById("btnRemoveEsfera");
+btnRemoveEsfera.addEventListener("click", () => {
+  remover();
+});
+
+// Carregar um objeto
+const objLoader = new OBJLoader();
+objLoader.load('assets/cat/cat.obj', (objeto) => {
+  objeto.scale.set(0.1, 0.1, 0.1); // Reduz o objeto
+  objeto.rotation.x = -Math.PI / 2; // -90 graus
+  cena.add(objeto);
+});
+
 const geometriaCubo = new THREE.BoxGeometry();
 const materialCubo = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
 const cubo = new THREE.Mesh(geometriaCubo, materialCubo);
@@ -78,26 +135,27 @@ chao.rotation.set(-Math.PI / 2, 0, 0);
 chao.receiveShadow = true;
 cena.add(chao);
 
-// Adicionar Esfera
-function addEsfera(){
-    const geometriaEsfera = new THREE.SphereGeometry();
-    const materialEsfera = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
-    const esfera = new THREE.Mesh(geometriaEsfera, materialEsfera);
-
-    esfera.position.x = -3;
-    esfera.castShadow = true;
-    cena.add(esfera);
-}
-
 // 7. renderizar a cena
+// Percorrer array de objetos para rotacioná-los
 function renderizar() {
   requestAnimationFrame(renderizar);
+
+  objetos.forEach((obj) => {
+    obj.rotation.y += 0.03;
+    obj.rotation.x += 0.02;
+    obj.position.z -= 0.03;
+
+    if (obj.position.z < -10) {
+      obj.position.z = 0;
+    }
+  });
+
   cubo.rotation.x += 0.03;
   cubo.rotation.y += 0.03;
   cubo.position.z += -0.03;
   if(cubo.position.z < -10){
     cubo.rotation.x = 0;
-    cubo.rotation.y = 0;
+    cubo.rotation.y = 0;  
     cubo.position.z = 0;
   }
 
@@ -121,8 +179,5 @@ function renderizar() {
   controlador.update();
 }
 
-
 renderizar();
-
-const btnAddEsfera = document.getElementById("btnAddEsfera");
 
