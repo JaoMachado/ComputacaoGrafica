@@ -10,7 +10,7 @@ import { EXRLoader } from "three/examples/jsm/Addons.js";
 
 // 1. criar uma cena básica
 const cena = new THREE.Scene();
-cena.backgroundColor = 0xffffff;
+cena.background = new THREE.Color(0xffffff);
 
 // habilita névoa na cena
 cena.fog = new THREE.Fog(0xffffff, 0.0025, 50);
@@ -47,10 +47,10 @@ controlador.maxPolarAngle = 90 * (Math.PI / 180);
 
 // Criar o EXRLoader
 const exrLoader = new EXRLoader();
-exrLoader.load("../assets/outdoor/bloem_field_sunrise_1k.exr", (textura) => {
+exrLoader.load("../assets/outdoor/outdoor_chapel_4k.exr", (textura) => {
     textura.mapping = THREE.EquirectangularReflectionMapping;
-    textura.outputColorSpace = THREE.SRGBColorSpace;
-    createSkybox(textura);
+    cena.background = textura;
+    cena.environment = textura;
 });
 
 function createSkybox(textura){
