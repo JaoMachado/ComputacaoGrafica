@@ -11,7 +11,10 @@ class App{
     #controles = null;
 
     constructor(){
-        window.addEventListener('resize', this.#redimensionar);
+        window.addEventListener('resize', () => {
+            this.#redimensionar();
+        });
+            
     }
 
     // initialize(): Método para iniciar o projeto, configurações iniciais.
@@ -65,6 +68,9 @@ class App{
         // atualizando o aspect da camera e atualizando o renderizador
         this.#camera.aspect = aspect;
         this.#renderizador.setSize(w, h);
+
+        // Atualizar a matriz de projeção da câmera
+        this.#camera.updateProjectionMatrix();
     }
 };
 
